@@ -22,7 +22,7 @@ onmessage = function(e) {
         }
 
         for(var j in requisite_path_entires) {
-            if(path[path.length - j - 2] != requisite_path_entires[4-j]) {
+            if(path[path.length - j - 2] != requisite_path_entires[requisite_path_entires.length-j]) {
                 tosend.Error = "badpath";
                 tosend.ErrorMessage = "Incorrect path chosen.  Trying selecting a path that looks like \".../steamapps/common/FPSAimTrainer/FPSAimTrainer/stats/\"";
                 postMessage(tosend);
