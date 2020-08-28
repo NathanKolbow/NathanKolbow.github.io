@@ -1,32 +1,55 @@
 <!DOCTYPE html>
-<script type="text/javascript" src="js/charting.js"></script>
-<script type="text/javascript" src="js/chart.js"></script>
 
+<script src="js/chart.js"></script>
+<script src="js/aesthetics.js"></script>
 <html>
+    <body>
+        <p id='select-text'>Select your stats folder<sup>†</sup>:</p>
+        <input id="file-picker" type="file" directory multiple webkitdirectory></input>
 
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-
-    <div style="width: 100%;">
-        <div class="chart-container" style="width:50%; float: left;">
-            <canvas id="myChart" width=50%></canvas>
-            <script>
-                draw_chart();
-            </script>
+        <div style="width: 100%;">
+            <div class="chart-container" style="width:75%; float: left;">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div style="margin-left: 76%;">
+                <select name="scenario" id="dropdown" onchange="update_chart();" style="visibility:hidden;">
+                    <option value="Select Scenario" selected disabled hidden>
+                        Waiting to Load Files
+                    </option>
+                </select>
+                <p id='stats-paragraph' style='visibility:hidden;'>
+                    Statistics
+                </p>
+            </div>
         </div>
-        <div style="margin-left: 50%;">
-            <select name="scenario" id="dropdown" onchange="draw_chart();">
-                <option value="Bounce 180">Bounce 180</option>
-                <option value="1wall 6targets small">1wall 6targets small</option>
-            </select>
-            <br/>
-            Statistics
-        </div>
-    </div>
-
-	Words, words, words
-  </body>
+    </body>
 </html>
+
+<!-- Start up the worker after the screen is displayed -->
+<script>
+    if(window.Worker) {
+        var myWorker = new Worker('js/worker.js')
+
+        myWorker.onmessage = e => {
+            // This function executes after we RECEIVE a message from the worker
+
+            var unique_challenges = e.data.unique_challenges;
+            var challenge_data = e.data.challenge_data;
+
+            window.localStorage.setItem('unique_challenges', JSON.stringify(unique_challenges))
+            window.localStorage.setItem('challenge_data',  JSON.stringify(challenge_data))
+
+            update_dropdown()
+        };
+
+        let picker = document.getElementById('file-picker')
+        picker.addEventListener('change', e => {
+            // TODO: Check to make sure what we're getting is actual stats files BEFORE calling this function
+            post_file_collection();
+            create_chart()
+            myWorker.postMessage(Array.from(e.target.files))
+        });
+    } else {
+        alert("Your browser doesn\'t support web workers. Try using Chrome instead.")
+    }
+</script>

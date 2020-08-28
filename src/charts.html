@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="js/charting.js"></script>
+<script type="text/javascript" src="js/chart.js"></script>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div style="width: 100%;">
+        <div class="chart-container" style="width:75%; float: left;">
+            <canvas id="myChart"></canvas>
+            <script>
+                draw_chart();
+            </script>
+        </div>
+        <div style="margin-left: 76%;">
+            <select name="scenario" id="dropdown" onchange="draw_chart();">
+                <option value="Waiting To Load Files" selected disabled hidden>
+                    Waiting to Load Files
+                </option>
+            </select>
+            <br/>
+            Statistics
+        </div>
+    </div>
+  </body>
+</html>

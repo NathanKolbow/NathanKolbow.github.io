@@ -1,8 +1,8 @@
 {
-  "name": "simple-desktop-app-electronjs",
-  "productName": "simple-desktop-app-electronjs",
+  "name": "kovaaks-stats-viewer",
+  "productName": "Kovaak's Stats Viewer",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A utility for visualizing your progress in Kovaak's Aim Trainer",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
