@@ -1,11 +1,30 @@
 var CHART;
-var MAX_STATE = false;
+var MAX_STATE = true;
+var SCALE = 'linear';
+
+/* function load_samples() {
+    var tosend = {};
+
+} */
+
+function toggle_scaling() {
+    SCALE = (SCALE == 'linear') ? 'logarithmic' : 'linear';
+    CHART.options.scales.yAxes[0].type = SCALE;
+    CHART.options.scales.yAxes[1].type = SCALE;
+    CHART.update();
+}
+
+function toggle_max_state() {
+    MAX_STATE = !MAX_STATE;
+    CHART.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
+    CHART.update();
+}
 
 function post_file_collection() {
     document.getElementById('footnote').remove();
     document.getElementById('file-picker').remove();
     document.getElementById('picker-button').remove();
-    document.getElementById('dropdown').style.visibility = 'visible';
+    document.getElementById('post-folder-items').style.visibility = 'visible';
 }
 
 function update_dropdown() {
@@ -132,10 +151,7 @@ function create_chart() {
                 borderColor: 'rgba(99, 132, 255, 0.50)',
                 data: []
             }]
-        },
-
-        // Configuration options go here
-        options: {
+        }, options: {
             scales: {
                 xAxes: [{
                     display: true,

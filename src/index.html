@@ -6,29 +6,33 @@
 <script src="js/aesthetics.js"></script>
 <html>
     <body>
-        <button id="picker-button" onclick="document.getElementById('file-picker').click()">Select Stats Folder</button>
+        <div id="buttons">
+            <button id="picker-button" onclick="document.getElementById('file-picker').click();">Select Stats Folder</button>
+            <!-- <button id="picker-button" onclick="myWorker.postMessage(load_samples());">Load Sample Stats</button> -->
+        </div>
 
         <div id='footnote'>
             <hr>
             <p id='selectfiles'>
                 <sup>1</sup> For most users, this folder will be located in in a path like "C:\Program Files (x86)\Steam\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\" or "D:\SteamLibrary\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\".
                 <br/>
-                <sup>2</sup> Navigate to this folder, then, once inside, press the 'Upload' button.
+                <sup>2</sup> Navigate to the folder mentioned above, then, once inside, press the 'Upload' button.
                 <br/>
-                <sup>3</sup> This app does <b>not</b> work on the old, non-Chromium Edge browser.
+                <sup>3</sup> For the best results use either Chrome or Firefox.
             </p>
         </div>
 
         <br/>
         <input id="file-picker" type="file" directory multiple webkitdirectory></input>
 
-        <!--<div style="width: 100%;"> -->
+
+        <div id="post-folder-items" style="visibility:hidden;">
             <div class="chart-container" style="width:85%; margin:0 auto;">
                 <canvas id="myChart"></canvas>
             </div>
             <div style="width:75%; margin:0 auto; text-align:center;">
                 <div>
-                    <select name="scenario" id="dropdown" onchange="update_chart();" style="visibility:hidden;">
+                    <select name="scenario" id="dropdown" onchange="update_chart();">
                         <option value="Select Scenario" selected disabled hidden>
                             Waiting to Load Files
                         </option>
@@ -36,12 +40,18 @@
                 </div>
                 <p id='stats-paragraph'/>
             </div>
-        <!--</div>-->
+            <div style="width:100%;text-align:center;">
+                <button id="toggle-max" onclick="toggle_max_state();">Toggle Graph Boundaries</button>
+                <button id="toggle-scale" onclick="toggle_scaling();">Toggle Graph Scale</button>
+            </div>
+        </div>
     </body>
 </html>
 
 <!-- Start up the worker after the screen is displayed -->
 <script>
+    window.localStorage.clear()
+
     if(window.Worker) {
         var myWorker = new Worker('js/worker.js');
 

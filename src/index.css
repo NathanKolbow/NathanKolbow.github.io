@@ -11,7 +11,7 @@
 }
 
 button {
-    /* Button style from https://fdossena.com/?p=html5cool/buttons/i.frag */
+    /* Button style courtesy of https://fdossena.com/?p=html5cool/buttons/i.frag */
     display:inline-block;
     padding:0.5em 3em;
     border:0.16em solid #000000;
@@ -20,17 +20,11 @@ button {
     text-decoration:none;
     text-transform:uppercase;
     font-family:'Calibri',sans-serif;
-    font-weight:750;
-    font-size:20px;
     color:#000000;
     text-align:center;
     transition: all 0.15s;
     background:none;
-
-    position:fixed;
-    top:45%;
-    left:40%;
-    width:20%;
+    width:100%;
 
 	-webkit-touch-callout: none;  /* iOS Safari */
 	-webkit-user-select: none;  /* Safari */
@@ -39,6 +33,17 @@ button {
 	user-select: none;  /* Chrome, Opera and Firefox */
 
 	touch-action: manipulation;
+}
+
+#picker-button {
+    font-weight:750;
+    font-size:20px;
+}
+#buttons {
+    position:fixed;
+    top:40%;
+    left:40%;
+    width:20%;
 }
 button:hover {
     color:#00FFFF;
@@ -53,6 +58,12 @@ button:active {
         display:block;
         margin:0.4em auto;
     }
+}
+
+[id^=toggle-] {
+    font-weight:400;
+    font-size:12px;
+    width:15%;
 }
 
 input {

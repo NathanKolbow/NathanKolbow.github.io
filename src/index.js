@@ -9,11 +9,16 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+const nativeImage = require('electron').nativeImage;
+var image = nativeImage.createFromPath(__dirname + '/icon/kovaaks_edited_icon.png');
+image.setTemplateImage(true);
+
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+	icon: image,
   });
 
   // and load the index.html of the app.
