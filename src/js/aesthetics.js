@@ -102,22 +102,25 @@ function create_chart() {
             labels: [],
             datasets: [{
                 label: 'Score',
+                fill: false,
                 yAxisID: 'Score',
-                backgroundColor: 'rgba(255, 99, 132, 0.50)',
+                backgroundColor: 'rgba(255, 99, 132, 0.20)',
                 borderColor: 'rgba(255, 99, 132, 0.50)',
                 data: []
             },
             {
                 label: 'Unadjusted Score',
+                fill: false,
                 //yAxisID: 'Score',
-                backgroundColor: 'rgba(132, 255, 99, 0.50)',
+                backgroundColor: 'rgba(132, 255, 99, 0.20)',
                 borderColor: 'rgba(132, 255, 99, 0.50)',
                 data: []
             },
             {
                 label: 'Accuracy',
+                fill: false,
                 yAxisID: 'Accuracy',
-                backgroundColor: 'rgba(99, 132, 255, 0.50)',
+                backgroundColor: 'rgba(99, 132, 255, 0.20)',
                 borderColor: 'rgba(99, 132, 255, 0.50)',
                 data: []
             }]
@@ -154,7 +157,7 @@ function create_chart() {
                 }]
             },
             legend: {
-                display: false
+                display: true
             }
         }
     });

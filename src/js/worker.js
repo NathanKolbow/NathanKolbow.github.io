@@ -79,7 +79,7 @@ function process_stats(filetext) {
     while(split[0] != '\r' && split[0] != '' && split[0] != '\n') {
         var to_add = {};
         for(i = 0; i < split.length-1; i++) {
-            to_add[weapon_data_header[i]] = conv(split[i]);
+            to_add[conv(weapon_data_header[i])] = conv(split[i]);
         }
         dict.WeaponData.push(to_add);
         _line++;
@@ -90,7 +90,7 @@ function process_stats(filetext) {
     _line++;
     split = lines[_line].split(',');
     while(split[0] != '\r' && split[0] != '' && split[0] != '\n') {
-        dict.GeneralData[split[0].slice(0, split[0].length)] = conv(split[1]);
+        dict.GeneralData[conv(split[0]).slice(0, split[0].length)] = conv(split[1]);
         _line++;
         split = lines[_line].split(',');
     }
@@ -108,7 +108,7 @@ function process_stats(filetext) {
     _line++;
     split = lines[_line].split(',');
     while(split[0] != '\r' && split[0] != '' && split[0] != '\n') {
-        dict.Settings[split[0].slice(0, split[0].length)] = conv(split[1]);
+        dict.Settings[conv(split[0]).slice(0, split[0].length)] = conv(split[1]);
         _line++;
         split = lines[_line].split(',');
     }
@@ -117,7 +117,7 @@ function process_stats(filetext) {
 }
 
 function conv(x) {
-    x = x.replace('\r', '').replace('\n', '');
+    x = x.replace('\r', '').replace('\n', '').replace(':', '');
     var val = parseFloat(x);
     if(isNaN(val)) {
         return x;
