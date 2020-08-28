@@ -2,14 +2,32 @@ onmessage = function(e) {
     // Probably should implement something that looks down the directory tree,
     // or just force the user to find the stats folder themselves (Probably
     // not a horrible decision)
+    var requisite_path_entires = [ "steamapps", "common", "FPSAimTrainer", "FPSAimTrainer", "stats" ];
     var unique_challenges = [];
     var challenge_data = {};
+    var tosend = {};
     for(var i in e.data) {
+        console.log("e.data: " + e.data)
+
         var file = e.data[i];
+        var path;
+        if(file.path.includes('\\'))
+            path = file.path.split('\\');
+        else
+            path = file.path.split('/');
+
+        for(var j in requisite_path_entires) {
+            if(path[path.length - j - 2] != requisite_path_entires[4-j]) {
+                tosend.Error = "badpath";
+                tosend.ErrorMessage = "Incorrect path chosen.  Trying selecting a path that looks like \".../steamapps/common/FPSAimTrainer/FPSAimTrainer/stats/\"";
+                postMessage(tosend);
+                return;
+            }
+        }
+
         var fr = new FileReaderSync();
         var stats_dict = process_stats(fr.readAsText(file));
 
-        console.log("relpath: " + file.webkitRelativePath);
         var split = file.webkitRelativePath.split('/');
         split = split[split.length - 1].split(' - Challenge - ');
         if(!unique_challenges.includes(split[0])) {
@@ -22,7 +40,7 @@ onmessage = function(e) {
         full_list = full_list.concat(date.split('-')[0].split('.'));
         full_list = full_list.concat(date.split('-')[1].split('.'));
 
-        for(var j in full_list) {
+        for(j in full_list) {
             full_list[j] = parseInt(full_list[j]);
         }
         date = new Date(full_list[0], full_list[1], full_list[2],
@@ -33,7 +51,6 @@ onmessage = function(e) {
         challenge_data[split[0]].push(stats_dict);
     }
 
-    var tosend = {};
     tosend.unique_challenges = unique_challenges;
     tosend.challenge_data = challenge_data;
     postMessage(tosend);

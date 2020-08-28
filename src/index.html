@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 
+<link rel="stylesheet" type="text/css" href="index.css">
+
 <script src="js/chart.js"></script>
 <script src="js/aesthetics.js"></script>
 <html>
     <body>
-        <p id='select-text'>Select your stats folder:</p>
+        <button id="picker-button" onclick="document.getElementById('file-picker').click()">Select Stats Folder</button>
+
+        <div id='footnote'>
+            <hr>
+            <p id='selectfiles'>
+                <sup>1</sup> For most users, this folder will be located in in a path like "C:\Program Files (x86)\Steam\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\" or "D:\SteamLibrary\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\".
+                <br/>
+                <sup>2</sup> Navigate to this folder, then, once inside, press the 'Upload' button.
+            </p>
+        </div>
+
+        <br/>
         <input id="file-picker" type="file" directory multiple webkitdirectory></input>
 
-        <div style="width: 100%;">
-            <div class="chart-container" style="width:75%; float: left;">
+        <!--<div style="width: 100%;"> -->
+            <div class="chart-container" style="width:85%; margin:0 auto;">
                 <canvas id="myChart"></canvas>
             </div>
-            <div style="margin-left: 76%;">
-                <select name="scenario" id="dropdown" onchange="update_chart();" style="visibility:hidden;">
-                    <option value="Select Scenario" selected disabled hidden>
-                        Waiting to Load Files
-                    </option>
-                </select>
-                <p id='stats-paragraph' style='visibility:hidden;'>
-                    Statistics
-                </p>
+            <div style="width:75%; margin:0 auto; text-align:center;">
+                <div>
+                    <select name="scenario" id="dropdown" onchange="update_chart();" style="visibility:hidden;">
+                        <option value="Select Scenario" selected disabled hidden>
+                            Waiting to Load Files
+                        </option>
+                    </select>
+                </div>
+                <p id='stats-paragraph'/>
             </div>
-        </div>
+        <!--</div>-->
     </body>
 </html>
 
 <!-- Start up the worker after the screen is displayed -->
 <script>
     if(window.Worker) {
-        var myWorker = new Worker('js/worker.js')
+        var myWorker = new Worker('js/worker.js');
 
         myWorker.onmessage = e => {
             // This function executes after we RECEIVE a message from the worker
+            if(e.data.Error != null) {
+                document.getElementById('file-picker').value = '';
+                alert(e.data.ErrorMessage);
+            } else {
+                // TODO: Add other error checking in worker.js to make sure all of the files process fine.
+                //       This will really just boil down to a try-catch and returning error if an error is caught
+                post_file_collection();
+                create_chart();
 
-            var unique_challenges = e.data.unique_challenges;
-            var challenge_data = e.data.challenge_data;
+                var unique_challenges = e.data.unique_challenges;
+                var challenge_data = e.data.challenge_data;
 
-            window.localStorage.setItem('unique_challenges', JSON.stringify(unique_challenges))
-            window.localStorage.setItem('challenge_data',  JSON.stringify(challenge_data))
+                window.localStorage.setItem('unique_challenges', JSON.stringify(unique_challenges));
+                window.localStorage.setItem('challenge_data',  JSON.stringify(challenge_data));
 
-            update_dropdown()
+                update_dropdown();
+            }
         };
 
-        let picker = document.getElementById('file-picker')
+        let picker = document.getElementById('file-picker');
         picker.addEventListener('change', e => {
-            // TODO: Check to make sure what we're getting is actual stats files BEFORE calling this function
-            post_file_collection();
-            create_chart()
-            myWorker.postMessage(Array.from(e.target.files))
+            myWorker.postMessage(Array.from(e.target.files));
         });
     } else {
-        alert("Your browser doesn\'t support web workers. Try using Chrome instead.")
+        alert("Your browser doesn\'t support web workers. Try using Chrome instead.");
     }
 </script>

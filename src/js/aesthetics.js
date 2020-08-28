@@ -1,20 +1,20 @@
-var chart;
+var CHART;
+var MAX_STATE = false;
 
 function post_file_collection() {
-    document.getElementById('select-text').remove();
+    document.getElementById('footnote').remove();
     document.getElementById('file-picker').remove();
+    document.getElementById('picker-button').remove();
     document.getElementById('dropdown').style.visibility = 'visible';
-    document.getElementById('stats-paragraph').style.visibility = 'visible';
 }
 
 function update_dropdown() {
     // New dropdown options are stored in window.localStorage.getItem('unique_challenges')
     var dropdown = document.getElementById('dropdown');
     // Remove everything except the first, default option
-    for(var j = dropdown.length; j > 0; j--) {
-        dropdown.remove(j);
+    for(var j = 0; j < dropdown.length; j++) {
+        dropdown.remove(0);
     }
-    dropdown[0].text = 'Select Scenario';
 
     var unique_challenges = JSON.parse(window.localStorage.getItem('unique_challenges'));
     for(j in unique_challenges) {
@@ -23,14 +23,16 @@ function update_dropdown() {
         opt.text = unique_challenges[j];
         dropdown.appendChild(opt);
     }
+
+    update_chart();
 }
 
 function update_chart() {
     // Reset chart data
-    chart.data.labels = [];
-    chart.data.datasets[0].data = [];
-    chart.data.datasets[1].data = [];
-    chart.data.datasets[2].data = [];
+    CHART.data.labels = [];
+    CHART.data.datasets[0].data = [];
+    CHART.data.datasets[1].data = [];
+    CHART.data.datasets[2].data = [];
 
     // Scenario is stored in id='dropdown'
     var dropdown = document.getElementById('dropdown');
@@ -56,10 +58,10 @@ function update_chart() {
         data = list[j].GeneralData;
 
         // Add the data to the chart
-        chart.data.labels.push('');  // we need labels for placeholders, even though we don't use them
-        chart.data.datasets[0].data.push(data.Score);
-        chart.data.datasets[1].data.push(data.Score / data.Accuracy);
-        chart.data.datasets[2].data.push(data.Accuracy);
+        CHART.data.labels.push('');  // we need labels for placeholders, even though we don't use them
+        CHART.data.datasets[0].data.push(data.Score);
+        CHART.data.datasets[1].data.push((data.Score / data.Accuracy).toFixed(5));
+        CHART.data.datasets[2].data.push(data.Accuracy);
 
         // Collect max and min data
         if(data.Score > max_score) {
@@ -70,12 +72,12 @@ function update_chart() {
             min_score = data.Score;
             _min_score = j;
         }
-        if(data.Score / data.Accuracy > max_acc) {
-            max_unadjusted = data.Score / data.Accuracy;
+        if(data.Score / data.Accuracy > max_unadjusted) {
+            max_unadjusted = parseFloat((data.Score / data.Accuracy).toFixed(5));
             _max_unadjusted = j;
         }
-        if(data.Score / data.Accuracy < min_acc) {
-            min_unadjusted = data.Score / data.Accuracy;
+        if(data.Score / data.Accuracy < min_unadjusted) {
+            min_unadjusted = parseFloat((data.Score / data.Accuracy).toFixed(5));
             _min_unadjusted = j;
         }
         if(data.Accuracy > max_acc) {
@@ -88,12 +90,18 @@ function update_chart() {
         }
     }
 
-    chart.update();
+    CHART.update();
+    document.getElementById('stats-paragraph').innerText = "Max Score: " + max_score.toFixed(2) +
+                                                           "\tMin Score: " + min_score.toFixed(2) +
+                                                           "\nMax Unadjusted: " + max_unadjusted.toFixed(2) +
+                                                           "\tMin Unadjusted: " + min_unadjusted.toFixed(2) +
+                                                           "\nMax Acc: " + max_acc.toFixed(2) +
+                                                           "\tMin Acc: " + min_acc.toFixed(2);
 }
 
 function create_chart() {
     var ctx = document.getElementById('myChart').getContext('2d');
-    chart = new Chart(ctx, {
+    CHART = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
@@ -146,6 +154,13 @@ function create_chart() {
                     id: 'Score',
                     type: 'linear',
                     position: 'left',
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                    scaleLabel: {
+                        labelString: 'Scores',
+                        display: true,
+                    }
                     //gridLines: {
                     //    borderDash: [8, 4],
                     //    color: "#348632"
@@ -153,7 +168,23 @@ function create_chart() {
                 }, {
                     id: 'Accuracy',
                     type: 'linear',
-                    position: 'right'
+                    position: 'right',
+                    ticks: {
+                        beginAtZero: true,
+                        suggestedMax: 1,
+                        stepSize: 0.25,
+                        /*userCallback: function(label, index, labels) {
+                            console.log("label: " + label + "parseInt(label).toFixed(2): " + parseInt(label).toFixed(2))
+                            return label.toFixed(2);
+                        }*/
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    scaleLabel: {
+                        labelString: 'Accuracy',
+                        display: true,
+                    }
                 }]
             },
             legend: {
