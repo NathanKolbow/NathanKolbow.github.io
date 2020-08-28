@@ -8,14 +8,18 @@ onmessage = function(e) {
     var tosend = {};
 
     for(var i in e.data) {
-        console.log(e.data)
-        console.log(e.data[0])
         var file = e.data[i];
         var path;
-        if(file.path.includes('\\'))
-            path = file.path.split('\\');
-        else
-            path = file.path.split('/');
+
+        try {
+            if(file.path.includes('\\'))
+                path = file.path.split('\\');
+            else
+                path = file.path.split('/');
+        } catch(error) {
+            path = file.webkitRelativePath.split('/');
+            requisite_path_entires = [ "stats" ];
+        }
 
         for(var j in requisite_path_entires) {
             if(path[path.length - j - 2] != requisite_path_entires[4-j]) {
