@@ -8,6 +8,8 @@ onmessage = function(e) {
     var tosend = {};
 
     for(var i in e.data) {
+        console.log(e.data)
+        console.log(e.data[0])
         var file = e.data[i];
         var path;
         if(file.path.includes('\\'))
@@ -15,14 +17,12 @@ onmessage = function(e) {
         else
             path = file.path.split('/');
 
-        if(e.data.LoadingSamples != true) {
-            for(var j in requisite_path_entires) {
-                if(path[path.length - j - 2] != requisite_path_entires[4-j]) {
-                    tosend.Error = "badpath";
-                    tosend.ErrorMessage = "Incorrect path chosen.  Trying selecting a path that looks like \".../steamapps/common/FPSAimTrainer/FPSAimTrainer/stats/\"";
-                    postMessage(tosend);
-                    return;
-                }
+        for(var j in requisite_path_entires) {
+            if(path[path.length - j - 2] != requisite_path_entires[4-j]) {
+                tosend.Error = "badpath";
+                tosend.ErrorMessage = "Incorrect path chosen.  Trying selecting a path that looks like \".../steamapps/common/FPSAimTrainer/FPSAimTrainer/stats/\"";
+                postMessage(tosend);
+                return;
             }
         }
 
