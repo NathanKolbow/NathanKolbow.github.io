@@ -1,0 +1,85 @@
+#footnote {
+    font-family: 'Verdana';
+    font-size: 12px;
+    text-align: left;
+
+    position:fixed;
+    bottom: 5%;
+    left: 5%;
+
+    width: 90%;
+}
+
+button {
+    /* Button style from https://fdossena.com/?p=html5cool/buttons/i.frag */
+    display:inline-block;
+    padding:0.5em 3em;
+    border:0.16em solid #000000;
+    margin:0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family:'Calibri',sans-serif;
+    font-weight:750;
+    font-size:20px;
+    color:#000000;
+    text-align:center;
+    transition: all 0.15s;
+    background:none;
+
+    position:fixed;
+    top:45%;
+    left:40%;
+    width:20%;
+
+	-webkit-touch-callout: none;  /* iOS Safari */
+	-webkit-user-select: none;  /* Safari */
+	-moz-user-select: none;  /* Old versions of Firefox */
+	-ms-user-select: none;  /* Internet Explorer/Edge */
+	user-select: none;  /* Chrome, Opera and Firefox */
+
+	touch-action: manipulation;
+}
+button:hover {
+    color:#00FFFF;
+    border-color:#00FFFF;
+}
+button:active {
+    color:#008B8B;
+    border-color:#008B8B;
+}
+@media all and (max-width:30em){
+    button {
+        display:block;
+        margin:0.4em auto;
+    }
+}
+
+input {
+    visibility: hidden;
+
+	/* background-color: #4CAFFF;
+
+	font-family: opensans;
+	text-align: center;
+	font-size: 25px;
+	padding: 10px 0px;
+	color: white;
+
+	outline-style:none;
+	border:none;
+	cursor:pointer;
+
+	position:fixed;
+	width:50%;
+	bottom : 10%;
+	left : 25%;
+
+	-webkit-touch-callout: none; // iOS Safari
+	-webkit-user-select: none; // Safari
+	-moz-user-select: none; // Old versions of Firefox
+	-ms-user-select: none; // Internet Explorer/Edge
+	user-select: none; // Chrome, Opera and Firefox
+
+	touch-action: manipulation; */
+}
