@@ -1,5 +1,5 @@
 #footnote {
-    font-family: 'Verdana';
+    font-family: 'Verdana',sans-serif;
     font-size: 12px;
     text-align: left;
 
@@ -14,7 +14,7 @@ button {
     /* Button style courtesy of https://fdossena.com/?p=html5cool/buttons/i.frag */
     display:inline-block;
     padding:0.5em 3em;
-    border:0.16em solid #000000;
+    border:0.08em solid #000000;
     margin:0 0.3em 0.3em 0;
     box-sizing: border-box;
     text-decoration:none;
@@ -24,7 +24,6 @@ button {
     text-align:center;
     transition: all 0.15s;
     background:none;
-    width:100%;
 
 	-webkit-touch-callout: none;  /* iOS Safari */
 	-webkit-user-select: none;  /* Safari */
@@ -36,14 +35,13 @@ button {
 }
 
 #picker-button {
-    font-weight:750;
-    font-size:20px;
+    font-weight:350;
+    font-size:18px;
 }
 #buttons {
     position:fixed;
     top:40%;
-    left:40%;
-    width:20%;
+    text-align:center;
 }
 button:hover {
     color:#00FFFF;
@@ -68,29 +66,4 @@ button:active {
 
 input {
     visibility: hidden;
-
-	/* background-color: #4CAFFF;
-
-	font-family: opensans;
-	text-align: center;
-	font-size: 25px;
-	padding: 10px 0px;
-	color: white;
-
-	outline-style:none;
-	border:none;
-	cursor:pointer;
-
-	position:fixed;
-	width:50%;
-	bottom : 10%;
-	left : 25%;
-
-	-webkit-touch-callout: none; // iOS Safari
-	-webkit-user-select: none; // Safari
-	-moz-user-select: none; // Old versions of Firefox
-	-ms-user-select: none; // Internet Explorer/Edge
-	user-select: none; // Chrome, Opera and Firefox
-
-	touch-action: manipulation; */
 }

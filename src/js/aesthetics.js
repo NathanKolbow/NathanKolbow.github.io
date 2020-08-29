@@ -11,12 +11,14 @@ function toggle_scaling() {
     SCALE = (SCALE == 'linear') ? 'logarithmic' : 'linear';
     CHART.options.scales.yAxes[0].type = SCALE;
     CHART.options.scales.yAxes[1].type = SCALE;
+    document.getElementById('toggle-scale').innerText = 'Score Axis Scale: ' + SCALE;
     CHART.update();
 }
 
 function toggle_max_state() {
     MAX_STATE = !MAX_STATE;
     CHART.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
+    document.getElementById('toggle-max').innerText = 'Scale From Zero: ' + ((MAX_STATE) ? 'On' : 'Off');
     CHART.update();
 }
 

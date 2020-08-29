@@ -22,7 +22,6 @@ onmessage = function(e) {
         }
 
         for(var j in requisite_path_entires) {
-            console.log(path[path.length-j-2] + "!=" + requisite_path_entires[requisite_path_entires.length-j-1])
             if(path[path.length - j - 2] != requisite_path_entires[requisite_path_entires.length-j-1]) {
                 tosend.Error = "badpath";
                 tosend.ErrorMessage = "Incorrect path chosen.  Trying selecting a path that looks like \".../steamapps/common/FPSAimTrainer/FPSAimTrainer/stats/\"";
@@ -57,14 +56,13 @@ onmessage = function(e) {
         challenge_data[split[0]].push(stats_dict);
     }
 
+    for(var item in challenge_data) {
+        challenge_data[item].sort((a, b) => (a.Epoch > b.Epoch) ? 1 : -1);
+    }
     tosend.unique_challenges = unique_challenges;
     tosend.challenge_data = challenge_data;
     postMessage(tosend);
 };
-
-function sorted_insert(list, dict) {
-    // TODO: Implement and test this for adding dict items to the list of all dicts and sorting by datetime
-}
 
 function process_stats(filetext) {
     // TODO: Consider removing the stats like each individual kill that just take up
