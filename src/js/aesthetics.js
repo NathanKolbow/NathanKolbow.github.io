@@ -237,6 +237,7 @@ function create_chart() {
     // Create Tabulator data table
     DATA_TABLE = new Tabulator("#data-table", {
         autoColumns: true,
+        responsiveLayout: true,
         layout:"fitDataStretch",
         addRowPos: "top",
         columns: [
