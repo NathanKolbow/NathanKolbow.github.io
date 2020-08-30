@@ -82,6 +82,7 @@ function update_charts() {
 function redraw(chart, selected) {
     // No need to update labels b/c that will already have the correct amount of entries
     chart.data.datasets[0].data =[];
+    chart.data.datasets[0].label = selected;
      var list = JSON.parse(window.localStorage.getItem('challenge_data'))[document.getElementById('dropdown').value];
      for(var i in list) {
          chart.data.datasets[0].data.push(list[i].GeneralData[selected]);
