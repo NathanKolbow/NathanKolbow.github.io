@@ -1,31 +1,118 @@
-var CHART;
+var CHART1; // Score chart
+var CHART2; // Accuracy chart
+var CHART3; // Unadjusted score chart
 var MAX_STATE = true;
 var SCALE = 'linear';
 
-/* function load_samples() {
-    var tosend = {};
+var DROP1 = "Score";
+var DROP2 = "Accuracy";
+var DROP3 = "Unadjusted Score";
 
-} */
+function update_charts() {
+    var d1 = document.getElementById('chart1-select');
+    var d2 = document.getElementById('chart2-select');
+    var d3 = document.getElementById('chart3-select');
+    var drops = [ d1, d2, d3 ];
+
+    var selected;
+    var old;
+    var changed;
+    if(d1.value != DROP1) {
+        old = DROP1;
+        DROP1 = d1.value;
+        selected = DROP1;
+        changed = 0;
+        redraw(CHART1, selected);
+    } else if(d2.value != DROP2) {
+        old = DROP2;
+        DROP2 = d2.value;
+        selected = DROP2;
+        changed = 1;
+        redraw(CHART2, selected);
+    } else {
+        old = DROP3;
+        DROP3 = d3.value;
+        selected = DROP3;
+        changed = 2;
+        redraw(CHART3, selected);
+    }
+
+    for(var j = 0; j < drops[changed].length; j++) {
+        if(drops[changed][j].value == selected) {
+            drops[changed][j].hidden = true;
+        } else if(drops[changed][j].value == old) {
+            drops[changed][j].hidden = false;
+        }
+    }
+    // var d1 = document.getElementById('chart1-select');
+    // var d2 = document.getElementById('chart2-select');
+    // var d3 = document.getElementById('chart3-select');
+    // var drops = [ d1, d2, d3 ];
+    //
+    // var selected;
+    // var old;
+    // if(d1.value != DROP1) {
+    //     old = DROP1;
+    //     DROP1 = d1.value;
+    //     selected = DROP1;
+    //     redraw(CHART1, selected);
+    // } else if(d2.value != DROP2) {
+    //     old = DROP2;
+    //     DROP2 = d2.value;
+    //     selected = DROP2;
+    //     redraw(CHART2, selected);
+    // } else {
+    //     old = DROP3;
+    //     DROP3 = d3.value;
+    //     selected = DROP3;
+    //     redraw(CHART3, selected);
+    // }
+    //
+    // for(var i = 0; i < drops.length; i++) {
+    //     for(var j = 0; j < d1.length; j++) {
+    //         if(drops[i][j].value == selected) {
+    //             drops[i][j].hidden = true;
+    //         } else if(drops[i][j].value == old) {
+    //             drops[i][j].hidden = false;
+    //         }
+    //     }
+    // }
+}
+
+function redraw(chart, selected) {
+    // No need to update labels b/c that will already have the correct amount of entries
+    chart.data.datasets[0].data =[];
+     var list = JSON.parse(window.localStorage.getItem('challenge_data'))[document.getElementById('dropdown').value];
+     for(var i in list) {
+         chart.data.datasets[0].data.push(list[i].GeneralData[selected]);
+     }
+    chart.update();
+}
 
 function toggle_scaling() {
     SCALE = (SCALE == 'linear') ? 'logarithmic' : 'linear';
-    CHART.options.scales.yAxes[0].type = SCALE;
-    CHART.options.scales.yAxes[1].type = SCALE;
+    CHART1.options.scales.yAxes[0].type = SCALE;
+    CHART2.options.scales.yAxes[0].type = SCALE;
+    CHART3.options.scales.yAxes[0].type = SCALE;
     document.getElementById('toggle-scale').innerText = 'Score Axis Scale: ' + SCALE;
-    CHART.update();
+    CHART1.update();
+    CHART2.update();
+    CHART3.update();
 }
 
 function toggle_max_state() {
     MAX_STATE = !MAX_STATE;
-    CHART.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
+    CHART1.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
+    CHART2.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
+    CHART3.options.scales.yAxes[0].ticks.beginAtZero = MAX_STATE;
     document.getElementById('toggle-max').innerText = 'Scale From Zero: ' + ((MAX_STATE) ? 'On' : 'Off');
-    CHART.update();
+    CHART1.update();
+    CHART2.update();
+    CHART3.update();
 }
 
 function post_file_collection() {
-    document.getElementById('footnote').remove();
-    document.getElementById('file-picker').remove();
-    document.getElementById('picker-button').remove();
+    document.getElementById('pre-folder-items').remove();
     document.getElementById('post-folder-items').style.visibility = 'visible';
 }
 
@@ -50,10 +137,12 @@ function update_dropdown() {
 
 function update_chart() {
     // Reset chart data
-    CHART.data.labels = [];
-    CHART.data.datasets[0].data = [];
-    CHART.data.datasets[1].data = [];
-    CHART.data.datasets[2].data = [];
+    CHART1.data.labels = [];
+    CHART1.data.datasets[0].data = [];
+    CHART2.data.labels = [];
+    CHART2.data.datasets[0].data = [];
+    CHART3.data.labels = [];
+    CHART3.data.datasets[0].data = [];
 
     // Scenario is stored in id='dropdown'
     var dropdown = document.getElementById('dropdown');
@@ -79,10 +168,12 @@ function update_chart() {
         data = list[j].GeneralData;
 
         // Add the data to the chart
-        CHART.data.labels.push('');  // we need labels for placeholders, even though we don't use them
-        CHART.data.datasets[0].data.push(data.Score);
-        CHART.data.datasets[1].data.push((data.Score / data.Accuracy).toFixed(5));
-        CHART.data.datasets[2].data.push(data.Accuracy);
+        CHART1.data.labels.push('');  // we need labels for placeholders, even though we don't use them
+        CHART2.data.labels.push('');
+        CHART3.data.labels.push('');
+        CHART1.data.datasets[0].data.push(data.Score);
+        CHART2.data.datasets[0].data.push(data.Accuracy);
+        CHART3.data.datasets[0].data.push(data['Unadjusted Score']);
 
         // Collect max and min data
         if(data.Score > max_score) {
@@ -94,11 +185,11 @@ function update_chart() {
             _min_score = j;
         }
         if(data.Score / data.Accuracy > max_unadjusted) {
-            max_unadjusted = parseFloat((data.Score / data.Accuracy).toFixed(5));
+            max_unadjusted = data['Unadjusted Score'];
             _max_unadjusted = j;
         }
         if(data.Score / data.Accuracy < min_unadjusted) {
-            min_unadjusted = parseFloat((data.Score / data.Accuracy).toFixed(5));
+            min_unadjusted = data['Unadjusted Score'];
             _min_unadjusted = j;
         }
         if(data.Accuracy > max_acc) {
@@ -111,18 +202,34 @@ function update_chart() {
         }
     }
 
-    CHART.update();
-    document.getElementById('stats-paragraph').innerText = "Max Score: " + max_score.toFixed(2) +
-                                                           "\tMin Score: " + min_score.toFixed(2) +
-                                                           "\nMax Unadjusted: " + max_unadjusted.toFixed(2) +
-                                                           "\tMin Unadjusted: " + min_unadjusted.toFixed(2) +
-                                                           "\nMax Acc: " + max_acc.toFixed(2) +
-                                                           "\tMin Acc: " + min_acc.toFixed(2);
+    CHART1.update();
+    CHART2.update();
+    CHART3.update();
+    document.getElementById('stats-paragraph').innerText = "Max Score: " + max_score +
+                                                           "\tMin Score: " + min_score +
+                                                           "\nMax Unadjusted: " + max_unadjusted +
+                                                           "\tMin Unadjusted: " + min_unadjusted +
+                                                           "\nMax Acc: " + max_acc +
+                                                           "\tMin Acc: " + min_acc;
 }
 
 function create_chart() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    CHART = new Chart(ctx, {
+    var opts = ['Kills', 'Deaths', 'Avg TTK', 'Fight Time', 'Damage Taken'];
+    for(var i in opts) {
+        for(var j = 1; j <= 3; j++) {
+            if(document.getElementById('chart' + j + '-select').value == opts[j])
+                continue;
+
+            var opt = document.createElement('option');
+            opt.value = opts[i];
+            opt.text = opts[i];
+
+            document.getElementById('chart' + j + '-select').appendChild(opt);
+        }
+    }
+
+    var ctx = document.getElementById('chart1').getContext('2d');
+    CHART1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
@@ -136,22 +243,6 @@ function create_chart() {
                 backgroundColor: 'rgba(255, 99, 132, 0.20)',
                 borderColor: 'rgba(255, 99, 132, 0.50)',
                 data: []
-            },
-            {
-                label: 'Unadjusted Score',
-                fill: false,
-                //yAxisID: 'Score',
-                backgroundColor: 'rgba(132, 255, 99, 0.20)',
-                borderColor: 'rgba(132, 255, 99, 0.50)',
-                data: []
-            },
-            {
-                label: 'Accuracy',
-                fill: false,
-                yAxisID: 'Accuracy',
-                backgroundColor: 'rgba(99, 132, 255, 0.20)',
-                borderColor: 'rgba(99, 132, 255, 0.50)',
-                data: []
             }]
         }, options: {
             scales: {
@@ -159,8 +250,6 @@ function create_chart() {
                     display: true,
                     gridLines: {
                         display: false
-                    //    borderDash: [8, 4],
-                    //    color: "#ff0000"
                     },
                     ticks: {
                         callback: function(value, index, values) {
@@ -174,6 +263,7 @@ function create_chart() {
                     position: 'left',
                     ticks: {
                         beginAtZero: true,
+                        suggestedMax: 1,
                     },
                     scaleLabel: {
                         labelString: 'Scores',
@@ -183,21 +273,55 @@ function create_chart() {
                     //    borderDash: [8, 4],
                     //    color: "#348632"
                     //}
-                }, {
+                }]
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+
+    ctx = document.getElementById('chart2').getContext('2d');
+    CHART2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Accuracy',
+                fill: false,
+                yAxisID: 'Accuracy',
+                backgroundColor: 'rgba(99, 132, 255, 0.20)',
+                borderColor: 'rgba(99, 132, 255, 0.50)',
+                data: []
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '';
+                        }
+                    }
+                }],
+                yAxes: [{
                     id: 'Accuracy',
                     type: 'linear',
-                    position: 'right',
+                    position: 'left',
                     ticks: {
                         beginAtZero: true,
                         suggestedMax: 1,
-                        stepSize: 0.25,
                         /*userCallback: function(label, index, labels) {
                             console.log("label: " + label + "parseInt(label).toFixed(2): " + parseInt(label).toFixed(2))
                             return label.toFixed(2);
                         }*/
                     },
                     gridLines: {
-                        display: false
+                        display: true
                     },
                     scaleLabel: {
                         labelString: 'Accuracy',
@@ -206,7 +330,58 @@ function create_chart() {
                 }]
             },
             legend: {
-                display: true
+                display: false
+            }
+        }
+    });
+
+    ctx = document.getElementById('chart3').getContext('2d');
+    CHART3 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Unadjusted Score',
+                fill: false,
+                //yAxisID: 'Score',
+                backgroundColor: 'rgba(132, 255, 99, 0.20)',
+                borderColor: 'rgba(132, 255, 99, 0.50)',
+                data: []
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '';
+                        },
+                    }
+                }],
+                yAxes: [{
+                    id: 'Score',
+                    type: 'linear',
+                    position: 'left',
+                    ticks: {
+                        beginAtZero: true,
+                        suggestedMax: 1,
+                    },
+                    scaleLabel: {
+                        labelString: 'Unadjusted Scores',
+                        display: true,
+                    }
+                    //gridLines: {
+                    //    borderDash: [8, 4],
+                    //    color: "#348632"
+                    //}
+                }]
+            },
+            legend: {
+                display: false
             }
         }
     });

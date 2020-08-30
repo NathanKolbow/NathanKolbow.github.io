@@ -10,6 +10,13 @@
     width: 98%;
 }
 
+html, body, script {
+    position: fixed;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 button {
     /* Button style courtesy of https://fdossena.com/?p=html5cool/buttons/i.frag */
     display:inline-block;
@@ -58,10 +65,55 @@ button:active {
     }
 }
 
-[id^=toggle-] {
+button[id^=toggle-] {
     font-weight:400;
     font-size:12px;
     width:15%;
+}
+
+div[id^=container] {
+    height: 47%;
+    width: 47%;
+    float: left;
+}
+
+#container1 {
+    background-color: rgba(255, 0, 0, 0.05);
+    position:fixed;
+    top:1%;
+    left:1%;
+}
+#container2 {
+    background-color: rgba(0, 255, 0, 0.05);
+    position:fixed;
+    top:1%;
+    left:50.5%;
+}
+#container3 {
+    background-color: rgba(0, 0, 255, 0.05);
+    position:fixed;
+    top:50.5%;
+    left:1%;
+}
+#container4 {
+    background-color: rgba(0, 0, 0, 0.15);
+    position:fixed;
+    top:50.5%;
+    left:50.5%;
+}
+
+table {
+    border: 1px solid black;
+    width: 100%;
+}
+#blank_row {
+    height: 10px !important;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+div[id^=chart-container] {
+    width: 90%;
+    height: 90%;
 }
 
 input {

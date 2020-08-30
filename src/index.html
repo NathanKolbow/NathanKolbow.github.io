@@ -6,43 +6,103 @@
 <script src="js/aesthetics.js"></script>
 <html>
     <body>
-        <div id="buttons" style="width:100%;text-align:center;">
-            <button id="picker-button" onclick="document.getElementById('file-picker').click();">Select Stats Folder</button>
-            <!-- <button id="picker-button" onclick="myWorker.postMessage(load_samples());">Load Sample Stats</button> -->
+        <!----><div id="pre-folder-items">
+            <div id="buttons" style="width:100%;text-align:center;">
+                <button id="picker-button" onclick="document.getElementById('file-picker').click();">Select Stats Folder</button>
+                <button id="picker-button" onclick="myWorker.postMessage(load_samples());">Load Sample Stats</button>
+            </div>
+
+            <div id='footnote'>
+                <hr>
+                <p id='selectfiles'>
+                    <sup>1</sup> For most users, this folder will be located in "C:\Program Files (x86)\Steam\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\" or "D:\SteamLibrary\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\".
+                    <br/>
+                    <sup>2</sup> Navigate to the folder mentioned above, then, once inside, press the 'Upload' button.
+                    <br/>
+                    <sup>3</sup> For the best results use either Chrome or Firefox.
+                </p>
+            </div>
+
+            <br/>
+            <input id="file-picker" type="file" directory multiple webkitdirectory></input>
         </div>
 
-        <div id='footnote'>
-            <hr>
-            <p id='selectfiles'>
-                <sup>1</sup> For most users, this folder will be located in in a path like "C:\Program Files (x86)\Steam\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\" or "D:\SteamLibrary\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\".
-                <br/>
-                <sup>2</sup> Navigate to the folder mentioned above, then, once inside, press the 'Upload' button.
-                <br/>
-                <sup>3</sup> For the best results use either Chrome or Firefox.
-            </p>
-        </div>
 
-        <br/>
-        <input id="file-picker" type="file" directory multiple webkitdirectory></input>
-
-
-        <div id="post-folder-items" style="visibility:hidden;">
-            <div class="chart-container" style="width:80%; margin:0 auto;">
-                <canvas id="myChart"></canvas>
+        <div id="post-folder-items" style="width:100%; height:100%;visibility:hidden;">
+            <div id="container1">
+                <table>
+                    <tr>
+                        <td>
+                            <select id="chart1-select" onchange="update_charts();">
+                                <option value="Score" selected hidden>Score</option>
+                                <option value="Accuracy">Accuracy</option>
+                                <option value="Unadjusted Score">Unadjusted Score</option>
+                            </select>
+                            <!-- TDODO: Add a feature to add another option to a single graph, so that you can stack things -->
+                        </td>
+                    </tr>
+                    <tr id="blank_row"><td colspan="1"></td></tr>
+                    <tr>
+                        <td>
+                            <div id="chart-container">
+                                <canvas id="chart1"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div style="width:75%; margin:0 auto; text-align:center;">
-                <div>
-                    <select name="scenario" id="dropdown" onchange="update_chart();">
-                        <option value="Select Scenario" selected disabled hidden>
-                            Waiting to Load Files
-                        </option>
-                    </select>
-                </div>
-                <p id='stats-paragraph'/>
+            <div id="container2">
+                <table>
+                    <tr>
+                        <td>
+                            <select id="chart2-select" onchange="update_charts();">
+                                <option value="Score">Score</option>
+                                <option value="Accuracy" selected hidden>Accuracy</option>
+                                <option value="Unadjusted Score">Unadjusted Score</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="blank_row"><td colspan="1"></td></tr>
+                    <tr>
+                        <td>
+                            <div id="chart-container">
+                                <canvas id="chart2"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div style="width:100%;text-align:center;">
+            <div id="container3">
+                <table>
+                    <tr>
+                        <td>
+                            <select id="chart3-select" onchange="update_charts();">
+                                <option value="Score">Score</option>
+                                <option value="Accuracy">Accuracy</option>
+                                <option value="Unadjusted Score" selected hidden>Unadjusted Score</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="blank_row"><td colspan="1"></td></tr>
+                    <tr>
+                        <td>
+                            <div id="chart-container">
+                                <canvas id="chart3"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="container4">
+                <select id="dropdown" onchange="update_chart();">
+                    <option value="Select Scenario" selected disabled hidden>
+                        Waiting to Load Files
+                    </option>
+                </select>
                 <button id="toggle-max" onclick="toggle_max_state();">Scale From Zero: On</button>
                 <button id="toggle-scale" onclick="toggle_scaling();">Score Axis Scale: Linear</button>
+
+                <p id='stats-paragraph'/>
             </div>
         </div>
     </body>
@@ -50,8 +110,9 @@
 
 <!-- Start up the worker after the screen is displayed -->
 <script>
-    window.localStorage.clear()
+    // create_chart();
 
+    window.localStorage.clear()
     if(window.Worker) {
         var myWorker = new Worker('js/worker.js');
 

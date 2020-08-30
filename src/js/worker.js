@@ -52,7 +52,6 @@ onmessage = function(e) {
                         full_list[3], full_list[4], full_list[5]);
         stats_dict.Epoch = date.getTime();
 
-        // TODO: Change this push to a custom sorted_insert
         challenge_data[split[0]].push(stats_dict);
     }
 
@@ -61,6 +60,7 @@ onmessage = function(e) {
     }
     tosend.unique_challenges = unique_challenges;
     tosend.challenge_data = challenge_data;
+    console.log(JSON.stringify(challenge_data))
     postMessage(tosend);
 };
 
@@ -123,7 +123,8 @@ function process_stats(filetext) {
         shots += dict.WeaponData[i].Shots;
         hits += dict.WeaponData[i].Hits;
     }
-    dict.GeneralData.Accuracy = hits/shots;
+    dict.GeneralData.Accuracy = (hits/shots).toFixed(2);
+    dict.GeneralData['Unadjusted Score'] = (dict.GeneralData.Score / dict.GeneralData.Accuracy).toFixed(2);
 
     dict.Settings = {};
     _line++;
@@ -138,13 +139,15 @@ function process_stats(filetext) {
 }
 
 function conv(x) {
+    // Yes parsing float twice is super innefficient but I don't know how to get down to 2 decimal places without
+    // using .toFixed and I hate floating point errors
     x = x.replace('\r', '').replace('\n', '').replace(':', '');
     var val = parseFloat(x);
     if(isNaN(val)) {
         return x;
     }
 
-    return val;
+    return parseFloat(val.toFixed(2));
 }
 
 function add_dropdown_option(option) {
