@@ -1,12 +1,12 @@
 var CHART1; // Score chart
 var CHART2; // Accuracy chart
-var CHART3; // Unadjusted score chart
+var CHART3; // True Score chart
 var MAX_STATE = true;
 var SCALE = 'linear';
 
-var DROP1 = "Score";
-var DROP2 = "Accuracy";
-var DROP3 = "Unadjusted Score";
+var DROP_LIST1 = "Score";
+var DROP_LIST2 = "Accuracy";
+var DROP_LIST3 = "True Score";
 
 var DATA_TABLE;
 
@@ -177,14 +177,14 @@ function update_chart() {
         CHART3.data.labels.push(list[j].DateStamp);
         CHART1.data.datasets[0].data.push(data.Score);
         CHART2.data.datasets[0].data.push(data.Accuracy);
-        CHART3.data.datasets[0].data.push(data['Unadjusted Score']);
+        CHART3.data.datasets[0].data.push(data['True Score']);
 
         // Update the data table
         DATA_TABLE.addData({
             Date: list[j].DateStamp,
             Score: list[j].GeneralData.Score,
             Accuracy: list[j].GeneralData.Accuracy,
-            'Unadjusted Score': list[j].GeneralData['Unadjusted Score'],
+            'True Score': list[j].GeneralData['True Score'],
         });
 
         // Collect max and min data
@@ -197,11 +197,11 @@ function update_chart() {
             _min_score = j;
         }
         if(data.Score / data.Accuracy > max_unadjusted) {
-            max_unadjusted = data['Unadjusted Score'];
+            max_unadjusted = data['True Score'];
             _max_unadjusted = j;
         }
         if(data.Score / data.Accuracy < min_unadjusted) {
-            min_unadjusted = data['Unadjusted Score'];
+            min_unadjusted = data['True Score'];
             _min_unadjusted = j;
         }
         if(data.Accuracy > max_acc) {
@@ -220,7 +220,7 @@ function update_chart() {
 }
 
 function create_chart() {
-    var opts = ['Kills', 'Deaths', 'Avg TTK', 'Fight Time', 'Damage Taken'];
+    var opts = ['Hyperscore', 'Kills', 'Deaths', 'Avg TTK', 'Fight Time', 'Damage Taken'];
     for(var i in opts) {
         for(var j = 1; j <= 3; j++) {
             if(document.getElementById('chart' + j + '-select').value == opts[j])
@@ -236,6 +236,14 @@ function create_chart() {
 
     // Create Tabulator data table
     DATA_TABLE = new Tabulator("#data-table", {
+        // Couldn't get rowClick to only display the gridline for a single x, so I'm not using it
+        // rowClick:function(e, row) {
+        //     X_GRIDLINE_INDEX = row.getPosition();
+        //     CHART1.update();
+        //     CHART2.update();
+        //     CHART3.update();
+        // },
+
         autoColumns: true,
         responsiveLayout: true,
         layout:"fitDataStretch",
@@ -244,7 +252,8 @@ function create_chart() {
             {title: 'Date', field: 'Date'},
             {title: 'Score', field: 'Score'},
             {title: 'Accuracy', field: 'Accuracy'},
-            {title: 'Unadjusted Score', field: 'Unadjusted Score'}
+            {title: 'True Score', field: 'True Score'},
+            {title: 'Hyperscore', field: 'Hyperscore'}
         ]
     });
 
@@ -317,7 +326,8 @@ function create_chart() {
                     },
                     ticks: {
                         callback: function(value, index, values) {
-                            return '';
+                            if(index != X_GRIDLINE_INDEX)
+                                return '';
                         }
                     }
                 }],
@@ -350,7 +360,7 @@ function create_chart() {
         data: {
             labels: [],
             datasets: [{
-                label: 'Unadjusted Score',
+                label: 'True Score',
                 fill: false,
                 //yAxisID: 'Score',
                 backgroundColor: 'rgba(132, 255, 99, 0.20)',

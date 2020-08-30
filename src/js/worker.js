@@ -124,7 +124,8 @@ function process_stats(filetext) {
         hits += dict.WeaponData[i].Hits;
     }
     dict.GeneralData.Accuracy = (hits/shots).toFixed(2);
-    dict.GeneralData['Unadjusted Score'] = (dict.GeneralData.Score / dict.GeneralData.Accuracy).toFixed(2);
+    dict.GeneralData['True Score'] = (dict.GeneralData.Score / dict.GeneralData.Accuracy).toFixed(2);
+    dict.GeneralData.Hyperscore = (dict.GeneralData.Score / Math.pow(dict.GeneralData.Accuracy, 2));
 
     dict.Settings = {};
     _line++;
