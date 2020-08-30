@@ -4,9 +4,9 @@ var CHART3; // True Score chart
 var MAX_STATE = true;
 var SCALE = 'linear';
 
-var DROP_LIST1 = "Score";
-var DROP_LIST2 = "Accuracy";
-var DROP_LIST3 = "True Score";
+var DROP1 = "Score";
+var DROP2 = "Accuracy";
+var DROP3 = "True Score";
 
 var DATA_TABLE;
 
