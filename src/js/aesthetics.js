@@ -175,9 +175,9 @@ function update_chart() {
         CHART1.data.labels.push(list[j].DateStamp);  // we need labels for placeholders, even though we don't use them
         CHART2.data.labels.push(list[j].DateStamp);
         CHART3.data.labels.push(list[j].DateStamp);
-        CHART1.data.datasets[0].data.push(data.Score);
-        CHART2.data.datasets[0].data.push(data.Accuracy);
-        CHART3.data.datasets[0].data.push(data['True Score']);
+        CHART1.data.datasets[0].data.push(data[DROP1]);
+        CHART2.data.datasets[0].data.push(data[DROP2]);
+        CHART3.data.datasets[0].data.push(data[DROP3]);
 
         // Update the data table
         DATA_TABLE.addData({
