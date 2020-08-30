@@ -2,6 +2,9 @@
 
 <link rel="stylesheet" type="text/css" href="index.css">
 
+
+<link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/aesthetics.js"></script>
 <html>
@@ -94,15 +97,19 @@
                 </table>
             </div>
             <div id="container4">
-                <select id="dropdown" onchange="update_chart();">
-                    <option value="Select Scenario" selected disabled hidden>
-                        Waiting to Load Files
-                    </option>
-                </select>
-                <button id="toggle-max" onclick="toggle_max_state();">Scale From Zero: On</button>
-                <button id="toggle-scale" onclick="toggle_scaling();">Score Axis Scale: Linear</button>
+                <div style="flex-grow:1; background-color: rgba(0, 255, 0, 0.2); height:10%;">
+                    <select id="dropdown" onchange="update_chart();">
+                        <option value="Select Scenario" selected disabled hidden>
+                            Waiting to Load Files
+                        </option>
+                    </select>
+                    <button id="toggle-max" onclick="toggle_max_state();">Scale From Zero: On</button>
+                    <button id="toggle-scale" onclick="toggle_scaling();">Score Axis Scale: Linear</button>
+                </div>
 
-                <p id='stats-paragraph'/>
+                <div id="data-table" style="flex-grow:1; background-color: rgba(255, 0, 0, 0.2); height:90%;">
+                    
+                </div>
             </div>
         </div>
     </body>

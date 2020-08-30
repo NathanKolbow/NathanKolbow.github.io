@@ -8,6 +8,8 @@ var DROP1 = "Score";
 var DROP2 = "Accuracy";
 var DROP3 = "Unadjusted Score";
 
+var DATA_TABLE;
+
 function update_charts() {
     var d1 = document.getElementById('chart1-select');
     var d2 = document.getElementById('chart2-select');
@@ -144,6 +146,7 @@ function update_chart() {
     CHART2.data.datasets[0].data = [];
     CHART3.data.labels = [];
     CHART3.data.datasets[0].data = [];
+    DATA_TABLE.clearData();
 
     // Scenario is stored in id='dropdown'
     var dropdown = document.getElementById('dropdown');
@@ -169,12 +172,20 @@ function update_chart() {
         data = list[j].GeneralData;
 
         // Add the data to the chart
-        CHART1.data.labels.push('');  // we need labels for placeholders, even though we don't use them
-        CHART2.data.labels.push('');
-        CHART3.data.labels.push('');
+        CHART1.data.labels.push(list[j].DateStamp);  // we need labels for placeholders, even though we don't use them
+        CHART2.data.labels.push(list[j].DateStamp);
+        CHART3.data.labels.push(list[j].DateStamp);
         CHART1.data.datasets[0].data.push(data.Score);
         CHART2.data.datasets[0].data.push(data.Accuracy);
         CHART3.data.datasets[0].data.push(data['Unadjusted Score']);
+
+        // Update the data table
+        DATA_TABLE.addData({
+            Date: list[j].DateStamp,
+            Score: list[j].GeneralData.Score,
+            Accuracy: list[j].GeneralData.Accuracy,
+            'Unadjusted Score': list[j].GeneralData['Unadjusted Score'],
+        });
 
         // Collect max and min data
         if(data.Score > max_score) {
@@ -206,12 +217,6 @@ function update_chart() {
     CHART1.update();
     CHART2.update();
     CHART3.update();
-    document.getElementById('stats-paragraph').innerText = "Max Score: " + max_score +
-                                                           "\tMin Score: " + min_score +
-                                                           "\nMax Unadjusted: " + max_unadjusted +
-                                                           "\tMin Unadjusted: " + min_unadjusted +
-                                                           "\nMax Acc: " + max_acc +
-                                                           "\tMin Acc: " + min_acc;
 }
 
 function create_chart() {
@@ -229,6 +234,20 @@ function create_chart() {
         }
     }
 
+    // Create Tabulator data table
+    DATA_TABLE = new Tabulator("#data-table", {
+        autoColumns: true,
+        layout:"fitDataStretch",
+        addRowPos: "top",
+        columns: [
+            {title: 'Date', field: 'Date'},
+            {title: 'Score', field: 'Score'},
+            {title: 'Accuracy', field: 'Accuracy'},
+            {title: 'Unadjusted Score', field: 'Unadjusted Score'}
+        ]
+    });
+
+    // Create charts
     var ctx = document.getElementById('chart1').getContext('2d');
     CHART1 = new Chart(ctx, {
         // The type of chart we want to create
@@ -266,14 +285,6 @@ function create_chart() {
                         beginAtZero: true,
                         suggestedMax: 1,
                     },
-                    scaleLabel: {
-                        labelString: 'Scores',
-                        display: true,
-                    }
-                    //gridLines: {
-                    //    borderDash: [8, 4],
-                    //    color: "#348632"
-                    //}
                 }]
             },
             legend: {
@@ -324,10 +335,6 @@ function create_chart() {
                     gridLines: {
                         display: true
                     },
-                    scaleLabel: {
-                        labelString: 'Accuracy',
-                        display: true,
-                    }
                 }]
             },
             legend: {
@@ -371,14 +378,6 @@ function create_chart() {
                         beginAtZero: true,
                         suggestedMax: 1,
                     },
-                    scaleLabel: {
-                        labelString: 'Unadjusted Scores',
-                        display: true,
-                    }
-                    //gridLines: {
-                    //    borderDash: [8, 4],
-                    //    color: "#348632"
-                    //}
                 }]
             },
             legend: {

@@ -100,12 +100,18 @@ div[id^=container] {
     position:fixed;
     top:50.5%;
     left:50.5%;
+
+    display:flex;
+    flex-direction:column;
 }
 
 table {
     border: 1px solid black;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
+
 #blank_row {
     height: 10px !important;
     background-color: rgba(0, 0, 0, 0.1);

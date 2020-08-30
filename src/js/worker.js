@@ -48,9 +48,10 @@ onmessage = function(e) {
         for(j in full_list) {
             full_list[j] = parseInt(full_list[j]);
         }
-        date = new Date(full_list[0], full_list[1], full_list[2],
+        date = new Date(full_list[0], full_list[1]-1, full_list[2],
                         full_list[3], full_list[4], full_list[5]);
         stats_dict.Epoch = date.getTime();
+        stats_dict.DateStamp = date.toLocaleString();
 
         challenge_data[split[0]].push(stats_dict);
     }
@@ -60,7 +61,6 @@ onmessage = function(e) {
     }
     tosend.unique_challenges = unique_challenges;
     tosend.challenge_data = challenge_data;
-    console.log(JSON.stringify(challenge_data))
     postMessage(tosend);
 };
 
