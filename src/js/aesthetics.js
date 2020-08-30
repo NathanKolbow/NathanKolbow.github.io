@@ -325,12 +325,11 @@ function create_chart() {
                     gridLines: {
                         display: false
                     },
-                    // ticks: {
-                    //     callback: function(value, index, values) {
-                    //         if(index != X_GRIDLINE_INDEX)
-                    //             return '';
-                    //     }
-                    // }
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '';
+                        }
+                    }
                 }],
                 yAxes: [{
                     id: 'Accuracy',
