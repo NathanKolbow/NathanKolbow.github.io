@@ -185,6 +185,7 @@ function update_chart() {
             Score: list[j].GeneralData.Score,
             Accuracy: list[j].GeneralData.Accuracy,
             'True Score': list[j].GeneralData['True Score'],
+            'Hyperscore': list[j].GeneralData.Hyperscore,
         });
 
         // Collect max and min data
