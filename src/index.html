@@ -7,15 +7,15 @@
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/aesthetics.js"></script>
+<script src="js/worker.js"></script>
 <html>
     <body>
-        <!----><div id="pre-folder-items">
+        <div id="pre-folder-items">
             <div id="buttons" style="width:100%;text-align:center;">
-                <button id="picker-button" onclick="document.getElementById('file-picker').click();">Select Stats Folder</button>
-                <button id="picker-button" onclick="myWorker.postMessage(load_samples());">Load Sample Stats</button>
+                <button class="minimalist-button" id="picker-button" onclick="document.getElementById('file-picker').click();">Select Stats Folder</button>
             </div>
 
-            <div id='footnote'>
+            <div class='footnote'>
                 <hr>
                 <p id='selectfiles'>
                     <sup>1</sup> For most users, this folder will be located in "C:\Program Files (x86)\Steam\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\" or "D:\SteamLibrary\steamapps\common\FPSAimTrainer\FPSAimTrainer\stats\".
@@ -27,11 +27,11 @@
             </div>
 
             <br/>
-            <input id="file-picker" type="file" directory multiple webkitdirectory></input>
+            <input class="file-picker" id="file-picker" type="file" directory multiple webkitdirectory></input>
         </div>
 
 
-        <div id="post-folder-items" style="width:100%; height:100%;visibility:hidden;">
+        <div id="post-folder-items" style="width:100%; height:100%;visibility:visible;">
             <div id="container1">
                 <table>
                     <tr>
@@ -97,14 +97,56 @@
                 </table>
             </div>
             <div id="container4">
-                <div style="flex-grow:1; background-color: rgba(0, 255, 0, 0.2); height:10%;">
-                    <select id="dropdown" onchange="update_chart();">
+                <div style="background-color: rgba(0, 255, 0, 0.2);">
+                    <select id="dropdown" onchange="reload_data();">
                         <option value="Select Scenario" selected disabled hidden>
                             Waiting to Load Files
                         </option>
                     </select>
-                    <button id="toggle-max" onclick="toggle_max_state();">Scale From Zero: On</button>
-                    <button id="toggle-scale" onclick="toggle_scaling();">Score Axis Scale: Linear</button>
+
+                    <!-- TODO: Add a separate filter for filtering date ranges here -->
+                    <button style="display:inline-block;" onclick="document.getElementById('myModal').style.display = 'block';">Options</button>
+                </div>
+
+                <div class="modal" id="myModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="update_filter_values(); document.getElementById('myModal').style.display = 'none';">&times;</span>
+                        <h2 style="text-align:center;">Options</h2>
+
+                        <div style="width:100%; height:100%;">
+                            <div style="width:50%; float:left;">
+                                <div class="options-text">
+                                    <div>First X% of scores per day:</div>
+                                    <div>Top X% of scores per day:</div>
+                                    <div>Top X% of acc per day:</div>
+                                    <div>Top X% of hyperscore per day:</div>
+                                </div>
+                                <div class="options-inputs">
+                                    <div><input value="100" type="number" min="0" max="100" id="first-of-day" onkeyup="var me = document.getElementById('first-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="top-of-day" onkeyup="var me = document.getElementById('top-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="top-acc-of-day" onkeyup="var me = document.getElementById('top-acc-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="top-hyper-of-day" onkeyup="var me = document.getElementById('top-hyper-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                </div>
+                            </div>
+                            <div style="width:50%; margin-left:50%;">
+                                <div class="options-text">
+                                    <div>Last X% of scores per day:</div>
+                                    <div>Bottom X% of scores per day:</div>
+                                    <div>Bottom X% of acc per day:</div>
+                                    <div>Bottom X% of hyperscore per day:</div>
+                                </div>
+                                <div class="options-inputs">
+                                    <div><input value="100" type="number" min="0" max="100" id="last-of-day" onkeyup="var me = document.getElementById('last-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="bottom-of-day" onkeyup="var me = document.getElementById('bottom-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="bottom-acc-of-day" onkeyup="var me = document.getElementById('bottom-acc-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                    <div><input value="100" type="number" min="0" max="100" id="bottom-hyper-of-day" onkeyup="var me = document.getElementById('bottom-hyper-of-day'); me.value = (me.value > 100) ? 100 : (me.value < 0) ? 0 : me.value;"></input></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <p style="font-size:12px;">Filtering is done <b>subtractively</b>; i.e., if an instance matches one filter but not another, it will be <b>removed</b>.</p>
+                    </div>
                 </div>
 
                 <div id="data-table" style="flex-grow:1; background-color: rgba(255, 0, 0, 0.2); height:90%;">

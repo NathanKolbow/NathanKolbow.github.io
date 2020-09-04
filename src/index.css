@@ -1,5 +1,24 @@
-#footnote {
-    font-family: 'Verdana',sans-serif;
+* {
+    font-family: 'Calibri',sans-serif;
+
+}
+
+input[id$=-of-day] {
+    /* These are all of the input boxes in the options menu */
+    height: 1em !important;
+}
+
+.options-text {
+    width: 50%;
+    float: left;
+}
+.options-inputs {
+    width: 50%;
+    margin-left: 50%;
+}
+
+.footnote {
+    font-family: 'Calibri',sans-serif;
     font-size: 12px;
     text-align: left;
 
@@ -17,7 +36,52 @@ html, body, script {
     margin: 0;
 }
 
-button {
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.plus-button {
+    border: 2px solid lightgrey;
+    background-color: #fff;
+    font-size: 10px;
+    height: 2.25em;
+    width: 2.25em;
+    border-radius: 999px;
+    position: relative;
+}
+
+.minimalist-button {
     /* Button style courtesy of https://fdossena.com/?p=html5cool/buttons/i.frag */
     display:inline-block;
     padding:0.5em 3em;
@@ -50,25 +114,19 @@ button {
     top:40%;
     text-align:center;
 }
-button:hover {
+.minimalist-button:hover {
     color:#00FFFF;
     border-color:#00FFFF;
 }
-button:active {
+.minimalist-button:active {
     color:#008B8B;
     border-color:#008B8B;
 }
 @media all and (max-width:30em){
-    button {
+    .minimalist-button {
         display:block;
         margin:0.4em auto;
     }
-}
-
-button[id^=toggle-] {
-    font-weight:400;
-    font-size:12px;
-    width:15%;
 }
 
 div[id^=container] {
@@ -122,6 +180,6 @@ div[id^=chart-container] {
     height: 90%;
 }
 
-input {
+.file-picker {
     visibility: hidden;
 }
