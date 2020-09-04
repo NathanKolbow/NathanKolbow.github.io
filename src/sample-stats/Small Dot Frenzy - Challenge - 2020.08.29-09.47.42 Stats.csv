@@ -1,0 +1,62 @@
+Kill #,Timestamp,Bot,Weapon,TTK,Shots,Hits,Accuracy,Damage Done,Damage Possible,Efficiency,Cheated
+1,09:47:13.446,target,pistol,0s,1,1,1,25,50,0.5,false
+2,09:47:14.225,target,pistol,0.001s,1,1,1,25,50,0.5,false
+3,09:47:14.843,target,pistol,0.001s,1,1,1,25,50,0.5,false
+4,09:47:15.350,target,pistol,0.001s,1,1,1,25,50,0.5,false
+5,09:47:16.051,target,pistol,0s,1,1,1,25,50,0.5,false
+6,09:47:16.669,target,pistol,0s,1,1,1,25,50,0.5,false
+7,09:47:17.801,target,pistol,0.347s,2,1,0.5,25,100,0.25,false
+8,09:47:18.552,target,pistol,0s,1,1,1,25,50,0.5,false
+9,09:47:20.780,target,pistol,1.527s,3,1,0.333,25,150,0.167,false
+10,09:47:24.045,target,pistol,2.465s,4,1,0.25,25,200,0.125,false
+11,09:47:24.732,target,pistol,0s,1,1,1,25,50,0.5,false
+12,09:47:25.412,target,pistol,0s,1,1,1,25,50,0.5,false
+13,09:47:26.148,target,pistol,0s,1,1,1,25,50,0.5,false
+14,09:47:26.934,target,pistol,0s,1,1,1,25,50,0.5,false
+15,09:47:27.774,target,pistol,0s,1,1,1,25,50,0.5,false
+16,09:47:29.975,target,pistol,1.597s,3,1,0.333,25,150,0.167,false
+17,09:47:30.586,target,pistol,0s,1,1,1,25,50,0.5,false
+18,09:47:31.308,target,pistol,0s,1,1,1,25,50,0.5,false
+19,09:47:31.899,target,pistol,0s,1,1,1,25,50,0.5,false
+20,09:47:32.594,target,pistol,0.001s,1,1,1,25,50,0.5,false
+21,09:47:33.968,target,pistol,0.736s,2,1,0.5,25,100,0.25,false
+22,09:47:34.691,target,pistol,0s,1,1,1,25,50,0.5,false
+23,09:47:35.329,target,pistol,0s,1,1,1,25,50,0.5,false
+24,09:47:35.989,target,pistol,0s,1,1,1,25,50,0.5,false
+25,09:47:36.712,target,pistol,0s,1,1,1,25,50,0.5,false
+26,09:47:37.545,target,pistol,0s,1,1,1,25,50,0.5,false
+27,09:47:38.219,target,pistol,0s,1,1,1,25,50,0.5,false
+28,09:47:38.913,target,pistol,0s,1,1,1,25,50,0.5,false
+29,09:47:40.017,target,pistol,0.597s,2,1,0.5,25,100,0.25,false
+30,09:47:40.649,target,pistol,0s,1,1,1,25,50,0.5,false
+31,09:47:41.844,target,pistol,0.326s,2,1,0.5,25,100,0.25,false
+
+Weapon,Shots,Hits,Damage Done,Damage Possible,,Sens Scale,Horiz Sens,Vert Sens,FOV,Hide Gun,Crosshair,Crosshair Scale,Crosshair Color,ADS Sens,ADS Zoom Scale
+pistol,42,31,775.0,2100.0,
+
+Kills:,31
+Deaths:,0
+Fight Time:,7.6
+Avg TTK:,0.968
+Damage Done:,775.0
+Damage Taken:,0.0
+Midairs:,0
+Midaired:,0
+Directs:,0
+Directed:,0
+Distance Traveled:,0.0
+Score:,31.0
+Scenario:,Small Dot Frenzy
+Hash:,23225434d0ff48a663946b8812fa8e14
+Game Version:,2.0.2.0
+
+Input Lag:,0
+Max FPS (config):,144.0
+Sens Scale:,Valorant
+Horiz Sens:,0.6
+Vert Sens:,0.6
+FOV:,103.0
+Hide Gun:,false
+Crosshair:,plus.png
+Crosshair Scale:,1.0
+Crosshair Color:,FFFF00

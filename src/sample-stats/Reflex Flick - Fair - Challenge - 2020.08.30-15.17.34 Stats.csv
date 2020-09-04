@@ -1,0 +1,51 @@
+Kill #,Timestamp,Bot,Weapon,TTK,Shots,Hits,Accuracy,Damage Done,Damage Possible,Efficiency,Cheated
+1,15:16:35.547,target_decay,pistol,0.645s,2,1,0.5,25,100,0.25,false
+2,15:16:37.124,target_decay,pistol,0.819s,2,1,0.5,25,100,0.25,false
+3,15:16:37.853,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+4,15:16:43.020,target_decay,pistol,4.451s,6,1,0.167,25,300,0.083,false
+5,15:16:47.265,target_decay,pistol,3.509s,5,1,0.2,25,250,0.1,false
+6,15:16:48.022,target_decay,pistol,0.001s,1,1,1,25,50,0.5,false
+7,15:16:48.702,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+8,15:16:52.057,target_decay,pistol,2.626s,4,1,0.25,25,200,0.125,false
+9,15:16:54.528,target_decay,pistol,1.735s,3,1,0.333,25,150,0.167,false
+10,15:16:59.702,target_decay,pistol,4.438s,6,1,0.167,25,300,0.083,false
+11,15:17:02.193,target_decay,pistol,1.789s,3,1,0.333,25,150,0.167,false
+12,15:17:02.901,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+13,15:17:03.560,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+14,15:17:06.040,target_decay,pistol,1.807s,3,1,0.333,25,150,0.167,false
+15,15:17:07.589,target_decay,pistol,0.841s,2,1,0.5,25,100,0.25,false
+16,15:17:08.220,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+17,15:17:08.887,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+18,15:17:09.561,target_decay,pistol,0.001s,1,1,1,25,50,0.5,false
+19,15:17:10.234,target_decay,pistol,0s,1,1,1,25,50,0.5,false
+20,15:17:19.915,target_decay,pistol,9.021s,11,1,0.091,25,550,0.045,false
+
+Weapon,Shots,Hits,Damage Done,Damage Possible,,Sens Scale,Horiz Sens,Vert Sens,FOV,Hide Gun,Crosshair,Crosshair Scale,Crosshair Color,ADS Sens,ADS Zoom Scale
+pistol,72,20,500.0,3600.0,
+
+Kills:,20
+Deaths:,0
+Fight Time:,31.683001
+Avg TTK:,3
+Damage Done:,500.0
+Damage Taken:,0.0
+Midairs:,0
+Midaired:,0
+Directs:,0
+Directed:,0
+Distance Traveled:,0.0
+Score:,555.555603
+Scenario:,Reflex Flick - Fair
+Hash:,a51ec6c2d75ccb78bdb0d20bf4ce9cb7
+Game Version:,2.0.2.0
+
+Input Lag:,0
+Max FPS (config):,144.0
+Sens Scale:,Valorant
+Horiz Sens:,0.6
+Vert Sens:,0.6
+FOV:,103.0
+Hide Gun:,false
+Crosshair:,plus.png
+Crosshair Scale:,1.0
+Crosshair Color:,FFFF00

@@ -1,0 +1,65 @@
+Kill #,Timestamp,Bot,Weapon,TTK,Shots,Hits,Accuracy,Damage Done,Damage Possible,Efficiency,Cheated
+1,11:45:43.503,target,pistol,0s,1,1,1,25,50,0.5,false
+2,11:45:44.165,target,pistol,0s,1,1,1,25,50,0.5,false
+3,11:45:44.706,target,pistol,0s,1,1,1,25,50,0.5,false
+4,11:45:45.255,target,pistol,0s,1,1,1,25,50,0.5,false
+5,11:45:45.914,target,pistol,0s,1,1,1,25,50,0.5,false
+6,11:45:46.588,target,pistol,0s,1,1,1,25,50,0.5,false
+7,11:45:47.962,target,pistol,0.477s,2,1,0.5,25,100,0.25,false
+8,11:45:48.586,target,pistol,0s,1,1,1,25,50,0.5,false
+9,11:45:49.323,target,pistol,0s,1,1,1,25,50,0.5,false
+10,11:45:50.142,target,pistol,0s,1,1,1,25,50,0.5,false
+11,11:45:50.822,target,pistol,0s,1,1,1,25,50,0.5,false
+12,11:45:51.454,target,pistol,0s,1,1,1,25,50,0.5,false
+13,11:45:52.789,target,pistol,0.758s,2,1,0.5,25,100,0.25,false
+14,11:45:53.455,target,pistol,0s,1,1,1,25,50,0.5,false
+15,11:45:54.281,target,pistol,0s,1,1,1,25,50,0.5,false
+16,11:45:54.913,target,pistol,0s,1,1,1,25,50,0.5,false
+17,11:45:55.414,target,pistol,0.001s,1,1,1,25,50,0.5,false
+18,11:45:56.913,target,pistol,0.861s,2,1,0.5,25,100,0.25,false
+19,11:45:58.095,target,pistol,0.521s,2,1,0.5,25,100,0.25,false
+20,11:45:58.948,target,pistol,0s,1,1,1,25,50,0.5,false
+21,11:45:59.698,target,pistol,0s,1,1,1,25,50,0.5,false
+22,11:46:00.392,target,pistol,0s,1,1,1,25,50,0.5,false
+23,11:46:01.080,target,pistol,0s,1,1,1,25,50,0.5,false
+24,11:46:01.935,target,pistol,0s,1,1,1,25,50,0.5,false
+25,11:46:02.664,target,pistol,0s,1,1,1,25,50,0.5,false
+26,11:46:03.428,target,pistol,0s,1,1,1,25,50,0.5,false
+27,11:46:04.219,target,pistol,0s,1,1,1,25,50,0.5,false
+28,11:46:06.038,target,pistol,0.986s,2,1,0.5,25,100,0.25,false
+29,11:46:06.914,target,pistol,0s,1,1,1,25,50,0.5,false
+30,11:46:07.692,target,pistol,0s,1,1,1,25,50,0.5,false
+31,11:46:09.448,target,pistol,0.909s,2,1,0.5,25,100,0.25,false
+32,11:46:10.137,target,pistol,0s,1,1,1,25,50,0.5,false
+33,11:46:11.011,target,pistol,0s,1,1,1,25,50,0.5,false
+34,11:46:12.220,target,pistol,0.423s,2,1,0.5,25,100,0.25,false
+
+Weapon,Shots,Hits,Damage Done,Damage Possible,,Sens Scale,Horiz Sens,Vert Sens,FOV,Hide Gun,Crosshair,Crosshair Scale,Crosshair Color,ADS Sens,ADS Zoom Scale
+pistol,41,34,850.0,2050.0,
+
+Kills:,34
+Deaths:,0
+Fight Time:,4.936
+Avg TTK:,0.882
+Damage Done:,850.0
+Damage Taken:,0.0
+Midairs:,0
+Midaired:,0
+Directs:,0
+Directed:,0
+Distance Traveled:,0.0
+Score:,34.0
+Scenario:,Small Dot Frenzy
+Hash:,23225434d0ff48a663946b8812fa8e14
+Game Version:,2.0.2.0
+
+Input Lag:,0
+Max FPS (config):,144.0
+Sens Scale:,Valorant
+Horiz Sens:,0.6
+Vert Sens:,0.6
+FOV:,103.0
+Hide Gun:,false
+Crosshair:,plus.png
+Crosshair Scale:,1.0
+Crosshair Color:,FFFF00
