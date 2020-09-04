@@ -136,25 +136,21 @@ div[id^=container] {
 }
 
 #container1 {
-    background-color: rgba(255, 0, 0, 0.05);
     position:fixed;
     top:1%;
     left:1%;
 }
 #container2 {
-    background-color: rgba(0, 255, 0, 0.05);
     position:fixed;
     top:1%;
     left:50.5%;
 }
 #container3 {
-    background-color: rgba(0, 0, 255, 0.05);
     position:fixed;
     top:50.5%;
     left:1%;
 }
 #container4 {
-    background-color: rgba(0, 0, 0, 0.15);
     position:fixed;
     top:50.5%;
     left:50.5%;
@@ -164,7 +160,7 @@ div[id^=container] {
 }
 
 table {
-    border: 1px solid black;
+    border: none;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -172,7 +168,6 @@ table {
 
 #blank_row {
     height: 10px !important;
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 div[id^=chart-container] {

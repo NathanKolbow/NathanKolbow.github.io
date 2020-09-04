@@ -33,6 +33,9 @@
 
 
         <div id="post-folder-items" style="width:100%; height:100%;visibility:hidden;">
+            <div id="line-drawer-one" style="position:fixed; left:-5%; top:-5%; width:110%; height:55%; border: 1px solid black;"/>
+            <div id="line-drawer-two" style="position:fixed; left:50%; top:-5%; width:55%; height:110%; border: 1px solid black;"/>
+
             <div id="container1">
                 <table>
                     <tr>
@@ -98,7 +101,7 @@
                 </table>
             </div>
             <div id="container4">
-                <div style="background-color: rgba(0, 255, 0, 0.2);">
+                <div>
                     <select id="dropdown" onchange="reload_data();">
                         <option value="Select Scenario" selected disabled hidden>
                             Waiting to Load Files
@@ -150,7 +153,7 @@
                     </div>
                 </div>
 
-                <div id="data-table" style="flex-grow:1; background-color: rgba(255, 0, 0, 0.2); height:90%;">
+                <div id="data-table" style="flex-grow:1; height:90%;">
                 </div>
             </div>
         </div>
