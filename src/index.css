@@ -8,6 +8,10 @@ input[id$=-of-day] {
     height: 1em !important;
 }
 
+/* .line-drawer {
+    border: 2px solid black;
+} */
+
 .options-text {
     width: 50%;
     float: left;
@@ -54,7 +58,7 @@ html, body, script {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
 }
 
 .close {
@@ -130,33 +134,45 @@ html, body, script {
 }
 
 div[id^=container] {
-    height: 47%;
-    width: 47%;
+    height: 45%;
+    width: 45%;
     float: left;
 }
 
 #container1 {
     position:fixed;
-    top:1%;
-    left:1%;
+    top:3.33%;
+    left:3.33%;
+
+    /* background-color: rgba(255, 0, 0, 0.1); */
 }
 #container2 {
     position:fixed;
-    top:1%;
-    left:50.5%;
+    top:3.33%;
+    left:51.66%;
+
+    /* background-color: rgba(0, 255, 0, 0.1); */
 }
 #container3 {
     position:fixed;
-    top:50.5%;
-    left:1%;
+    top:51.66%;
+    left:3.33%;
+
+    /* background-color: rgba(0, 0, 255, 0.1); */
 }
 #container4 {
     position:fixed;
-    top:50.5%;
-    left:50.5%;
+    top:51.66%;
+    left:51.66%;
 
     display:flex;
     flex-direction:column;
+
+    /* background-color: rgba(99, 99, 99, 0.1); */
+}
+
+select {
+    height: 100%;
 }
 
 table {
