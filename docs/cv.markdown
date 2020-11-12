@@ -4,4 +4,6 @@ title: CV
 permalink: /cv/
 ---
 
-<iframe src="{{site.baseurl}}/docs/yelp-writeup.pdf" width="100%"></iframe>
+<html>
+	<meta http-equiv = "refresh" content = "2; url = https://github.com/NathanKolbow/NathanKolbow.github.io/blob/master/docs/yelp-writeup.pdf" />
+</html>
