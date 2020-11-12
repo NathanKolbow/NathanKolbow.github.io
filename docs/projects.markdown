@@ -26,7 +26,8 @@ Stockfish is an open source, world class chess AI that is widely used both in hu
 #### _[MNIST Principal Component Analysis](https://github.com/NathanKolbow/MNIST_PCA)_
 This project uses NumPy and SciPy to implement Principal Component Analysis.  The code easily generalizes to any dataset, but the repo focuses on displaying projections of the famous [MNIST handwritten digit dataset](http://yann.lecun.com/exdb/mnist/).
 
-
+#### _[Single Linkage Hierarchical Clustering](https://github.com/nathankolbow/singlelinkage)_
+Utilizing NumPy for its underlying framework, this project performs single linkage hierarchical clustering.  Like the MNIST project, this code is easily generalized to arbitrary datasets, but the repo focuses on clustering Pokémon.  The output for this code mimics the output of [scipy.cluster.hierarchy.linkage](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html).
 
 
 
