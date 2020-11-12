@@ -17,9 +17,22 @@ A C implementation of the map-(combine-)reduce framework discussed in the semina
 #### _[eBack](https://github.com/NathanKolbow/eBack)_
 A Linux backup utility written in C and the Bash scripting language.  This utility is intended to speed up large-scale, local file backups by leveraging multiple external drives.
 
-#### _[Chess Match Analyzer](https://github.com/NathanKolbow/Chess-Match-Analyzer)
+#### _[Chess Match Analyzer](https://github.com/NathanKolbow/Chess-Match-Analyzer)_
 Stockfish is an open source, world class chess AI that is widely used both in human vs. AI gameplay as well as AI vs. AI gameplay.  This program uses Stockfish to help users improve their chess skills.  By providing move-by-move feedback on full chess games, users can see how the pendulum of control swang throughout the match.
 
 
 ## Bite Size
+
+#### _[MNIST Principal Component Analysis](https://github.com/NathanKolbow/MNIST_PCA)_
+This project uses NumPy and SciPy to implement Principal Component Analysis.  The code easily generalizes to any dataset, but the repo focuses on displaying projections of the famous [MNIST handwritten digit dataset](http://yann.lecun.com/exdb/mnist/).
+
+
+
+
+
+
+
+
+
+
 
