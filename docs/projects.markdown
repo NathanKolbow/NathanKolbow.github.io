@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects/
 ---
 
-This is an archive of my projects, broken into shorter (bite size) and longer (king size) projects.
+This is an archive of my projects, broken into larger (king size) and smaller (bite size) projects.
 
 ## King Size
 
