@@ -32,10 +32,11 @@ Utilizing NumPy for its underlying framework, this project performs single linka
 #### _[Modular Exponentiation](https://github.com/NathanKolbow/Modular-Exponentiator)_
 This repo implements simple methods for performing modular exponentiation in both Java and Python.
 
-#### _[Quadtree Visualizer]_(https://github.com/NathanKolbow/Quadtree-Visualizer)
+#### _[Quadtree Visualizer](https://github.com/NathanKolbow/Quadtree-Visualizer)_
 A quadtree is a tree data structure for which each component is broken into four subcomponents.  In the context of this project, each subcomponent is continually split apart until it is inhabited by only one of the many moving particles on the screen, or until it reaches a minimum size.  If the minimum size is reached, this is called a between any particles inhabiting that subcomponent, and an effect is drawn to the screen.
 
-
+#### _[Cofactor Expansion Calculator](https://github.com/NathanKolbow/Determinant-Calculator)_
+Cofactor expansion is a method used to compute the deterimant of some nxn matrix B.  This repo implements a naive approach to performing cofactor expansion on any nxn input matrix in both Python and Java.
 
 
 
