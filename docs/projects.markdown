@@ -8,8 +8,11 @@ This is an archive of my projects, broken into larger (king size) and smaller (b
 
 ## King Size
 
+### _[MLB Pitch Predictions](https://github.com/NathanKolbow/MLBPredictions)_
+In this project for STAT 451: _Introduction to Machine Learning and Pattern Classification_ my team used machine learning methods to predict the outcome of MLB pitches using real time data.  In this study we evaluate and compare several different model types including clustering, gradient boosting, and neural networks.
+
 #### _[Regression Analysis Paper](https://github.com/NathanKolbow/NathanKolbow.github.io/blob/master/docs/yelp-writeup.pdf)_
-This is my final report for _STAT 333: Applied Regression Analysis_.  This report was deemed exceptional enough to be awarded a score of 100% and was used to show other students in the course what an ideal report looks like.  The analyses were done in R, and all of the code for the report can be found in its GitHub repo [here]().
+This is my final report for STAT 333: _Applied Regression Analysis_.  This report was deemed exceptional enough to be awarded a score of 100% and was used to show other students in the course what an ideal report looks like.  The analyses were done in R, and all of the code for the report can be found in its GitHub repo [here]().
 
 #### _[MapReduce](https://github.com/NathanKolbow/MapReduce)_
 A C implementation of the map-(combine-)reduce framework discussed in the seminal paper MapReduce: Simplified Data Processing on Large Clusters (J Dean, S Ghemawat 2004).
